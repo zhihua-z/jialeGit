@@ -45,7 +45,26 @@ class BlackButton:
     
   def clear(self):
     self.btn.destroy()
+
+
+#jinengjian
+class JnButton:
+  def __init__(self, t, m, c, p):
+    self.text = t
+    self.master = m
+    self.command = c
+    self.position = p
     
+    self.btn = tk.Button(\
+      text=self.text, \
+      master=self.master, \
+      command=self.command, \
+      highlightbackground='#111111'
+      )
+    self.btn.place(x = self.position[0], y = self.position[1])
+    
+  def clear(self):
+    self.btn.destroy()   
 class JueseLabel:
   def __init__(self, juese, m, p):
     self.juese = juese
@@ -111,6 +130,118 @@ class JueseLabel:
     
     current_pos.add(20, 0)
     for z in self.juese.zhuangbei:
+      current_pos.add(0,100)
+      # t: temporary
+      tz = tk.Label(text=f'名字:{z.name} 防御:{z.fy}\n攻击:{z.gongji} 生命:{z.hp}\n法力:{z.mp} 体力:{z.tl}', master=self.master) 
+                            
+                           
+                           
+                            
+                           
+      tz.place(x = current_pos.x, y = current_pos.y)
+      self.register(tz)
+      
+    current_pos.add(-20, 0)
+    
+  def register(self, item):
+    self.ui_items.append(item)
+    
+  def clear(self):
+    for z in self.ui_items:
+      z.destroy()
+
+
+
+
+
+
+  
+'''''
+class ZhuangbeiLabel:
+  def __init__(self, zhuangbei, m, p):
+    self.zhuangbei = zhuangbei
+    self.master = m
+    self.position = Position(p)
+    self.ui_items = []
+    
+    self.draw()
+  
+  def draw(self):
+    self.clear()
+    current_pos = self.position.copy()
+    print(current_pos)
+    
+    t = tk.Label(text=f'名字：{self.zhuangbei.mingzi}', master=self.master)
+    t.place(x = current_pos.x, y = current_pos.y)
+    self.register(t)
+    
+    current_pos.add(0, 30)
+    t = tk.Label(text=f'防御：{self.zhuangbei.fy}', master=self.master)
+    t.place(x = current_pos.x, y = current_pos.y)
+    self.register(t)
+    
+    current_pos.add(0, 30)
+    t = tk.Label(text=f'攻击：{self.zhuangbei.gongji}', master=self.master)
+    t.place(x = current_pos.x, y = current_pos.y)
+    self.register(t)
+    
+    current_pos.add(0, 30)
+    t = tk.Label(text=f'血量：{self.zhuangbei.}', master=self.master)
+    t.place(x = current_pos.x, y = current_pos.y)
+    self.register(t)
+
+
+    current_pos.add(0, 30)
+    t = tk.Label(text=f'法力：{self.zhuangbei.lv}', master=self.master)
+    t.place(x = current_pos.x, y = current_pos.y)
+    self.register(t)
+
+
+    current_pos.add(0, 30)
+    t = tk.Label(text=f'体力：{self.zhuangbei.lv}', master=self.master)
+    t.place(x = current_pos.x, y = current_pos.y)
+    self.register(t)
+
+
+
+
+
+
+
+
+    
+    current_pos.add(0, 30)
+    t = tk.Label(text=f'招数：', master=self.master)
+    t.place(x = current_pos.x, y = current_pos.y)
+    self.register(t)
+    
+    current_pos.add(20, 0)
+    for z in self.juese.zhao:
+      current_pos.add(0, 30)
+      tz = tk.Label(text=f'{z.name}', master=self.master)
+      tz.place(x = current_pos.x, y = current_pos.y)
+      self.register(tz)
+      
+      leixing_wenzi = ''
+      if z.leixing == 's':
+        leixing_wenzi = '生命'
+      elif z.leixing == 't':
+        leixing_wenzi = '体力'
+      elif z.leixing == 'm':
+        leixing_wenzi = '法力'
+      
+      tz = tk.Label(text=f'攻击：{z.gongji}, 消耗: {z.xiaohao}点{leixing_wenzi}', master=self.master)
+      tz.place(x = current_pos.x, y = current_pos.y)
+      self.register(tz)
+    current_pos.add(-20, 0)
+    
+    current_pos.add(0, 30)
+    t = tk.Label(text=f'装备：', master=self.master)
+    t.place(x = current_pos.x, y = current_pos.y)
+    self.register(t)
+    
+    current_pos.add(20, 0)
+    for z in self.juese.zhuangbei:
       current_pos.add(0, 30)
       # t: temporary
       tz = tk.Label(text=f'{z.name}, {z.fy}, {z.gongji}, {z.hp}, {z.mp}, {z.tl}', master=self.master)
@@ -125,7 +256,20 @@ class JueseLabel:
   def clear(self):
     for z in self.ui_items:
       z.destroy()
-      
+    '''
+
+
+
+
+
+
+
+
+
+
+
+
+
 '''class JueseLabelFight
 JueseLabelFight继承了JueseLabel
 当一个class继承另一个class的时候，我们是在说，这个JueseLabelFight是一个特殊的
