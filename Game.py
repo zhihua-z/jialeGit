@@ -26,8 +26,8 @@ class Game:
 
   def load(self):
     # 加载装备
-    f = open(self.p_zhuangbei, 'r')
-    d = f.read()
+    f = open(self.p_zhuangbei, 'r',encoding='utf-8')
+    d = f.read().encode('utf-8')
     data = json.loads(d)  # 列表 of 一堆字典
 
     for di in data:
@@ -40,13 +40,14 @@ class Game:
       print(x)
 
     # 加载招数
-    f = open(self.p_zhaoshu, 'r')
+    f = open(self.p_zhaoshu,'r',encoding='utf-8')
     d = f.read()
     data = json.loads(d)  # 列表 of 一堆字典
 
     for di in data:
       zs = Zhaoshu(di['名字'], di['攻击'], di['消耗'], di['类型'])
       self.zhaoshu.append(zs)
+
 
     print('加载了以下招数')
     for x in self.zhaoshu:
@@ -70,7 +71,7 @@ class Game:
     #     "萨满的珍珠法杖"
     # ]
 
-    f = open(self.p_juese, 'r')
+    f = open(self.p_juese, 'r',encoding='utf-8 ')
     d = f.read()
     data = json.loads(d)  # 列表 of 一堆字典
 
@@ -146,7 +147,19 @@ class Game:
       }
       js.append(d)
 
+    zb = []
+    for z in self.zhaoshu:
+      d = {'名字': z.name, '防御': z.fy, '攻击': z.gj, '血量': z.hp,'法力':z.mp,'体力':z.tl}
+      zb.append(d)
+
+    t = json.dumps(zs, indent=4, separators=(',', ': '), ensure_ascii=False)
+    f = open('zhaoshu.json', 'w')
+    f.write(t)
+    f.close()
+
     t = json.dumps(js, indent=4, separators=(',', ': '), ensure_ascii=False)
     f = open('juese.json', 'w')
     f.write(t)
     f.close()
+
+
